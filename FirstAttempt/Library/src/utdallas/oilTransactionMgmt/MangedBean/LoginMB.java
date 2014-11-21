@@ -1,0 +1,64 @@
+package utdallas.oilTransactionMgmt.MangedBean;
+
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
+
+import utdallas.oilTransactionMgmt.Dao.LoginDao;
+import utdallas.oilTransactionMgmt.VO.LoginVO;
+import utdallas.oilTransactionMgmt.VO.UserVO;
+
+public class LoginMB 
+{
+
+      private LoginVO loginVO =new LoginVO();
+
+	
+      public String  loginAuth()
+      {
+    	  System.out.println(loginVO.getUserName());
+    	  LoginDao dao = new LoginDao();
+    	  UserVO user = dao.authentication(loginVO);
+    	  //System.out.println(auth);
+    	  if(user!=null)
+    	  {
+    		   FacesContext context = FacesContext.getCurrentInstance();
+    	       HttpSession session = (HttpSession) context.getExternalContext().getSession(true);
+    	       session.setAttribute("user", user);
+    	       if(user.getUserType()==1)
+    	       {
+    	    	   return "Home";   
+    	       }
+    	       else if(user.getUserType()==3)
+    	       {
+    	    	   return "managerHome";
+    	       }
+    	       else
+    	       {
+    	    	   return "searchClientTrxHistory";
+    	       }
+    		   
+    	  }
+    	  return "loginFailure";
+      }
+      
+      
+      public LoginVO getLoginVO() {
+		return loginVO;
+	}
+
+	public void setLoginVO(LoginVO loginVO) {
+		this.loginVO = loginVO;
+	}
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+}

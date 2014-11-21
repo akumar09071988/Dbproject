@@ -1,0 +1,60 @@
+package utdallas.oilTransactionMgmt.Dao;
+
+import java.io.Serializable;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.Properties;
+
+public class BaseDao implements Serializable 
+{
+     private Connection connection =null;
+
+	
+     
+     
+     
+     
+     public BaseDao() {
+		super();
+		try
+		{
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			 Properties pro = new Properties();
+           
+			 pro.setProperty("serverName", "abhishek-pc\\abhishek"); 
+			//String connectioUrl ="jdbc:sqlserver://integratedSecurity=true;";//user=abhishek-pc\\Abhishek;password=qwerty12345;";
+			connection = DriverManager.getConnection("jdbc:sqlserver://localhost;user=sa;password=qwerty");
+			//connection = DriverManager.getConnection(connectioUrl,pro);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+
+
+   public  void closeConnection()
+   {
+	   try {
+		this.connection.close();
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+   }
+
+
+
+	public Connection getConnection() {
+		return connection;
+	}
+
+	
+     
+     
+     
+     
+     
+     
+}

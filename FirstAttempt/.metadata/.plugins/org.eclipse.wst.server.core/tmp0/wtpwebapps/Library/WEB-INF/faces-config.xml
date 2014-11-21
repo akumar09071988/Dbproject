@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config
+    xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
+    version="2.2">
+    
+    <managed-bean>
+		<managed-bean-name>loginMB</managed-bean-name>
+		<managed-bean-class>utdallas.oilTransactionMgmt.MangedBean.LoginMB</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+    
+     <managed-bean>
+		<managed-bean-name>TransactionMB</managed-bean-name>
+		<managed-bean-class>utdallas.oilTransactionMgmt.MangedBean.TransactionMB</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	
+	 <managed-bean>
+		<managed-bean-name>PaymentMB</managed-bean-name>
+		<managed-bean-class>utdallas.oilTransactionMgmt.MangedBean.PaymentMB</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+    
+     <managed-bean>
+		<managed-bean-name>ClientTrxHistoryMB</managed-bean-name>
+		<managed-bean-class>utdallas.oilTransactionMgmt.MangedBean.ClientTrxHistoryMB</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	
+	  
+     <managed-bean>
+		<managed-bean-name>AggregateTrxInfoMB</managed-bean-name>
+		<managed-bean-class>utdallas.oilTransactionMgmt.MangedBean.AggregateTrxInfoMB</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+    
+    
+	<managed-bean>
+		<managed-bean-name>startPageMB</managed-bean-name>
+		<managed-bean-class>utdallas.librarymanagement.managedBean.StartPageMB</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>addBorrowerMB</managed-bean-name>
+		<managed-bean-class>utdallas.librarymanagement.managedBean.AddBorrowerMB</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>checkOutMB</managed-bean-name>
+		<managed-bean-class>utdallas.librarymanagement.managedBean.CheckOutMB</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>checkInMB</managed-bean-name>
+		<managed-bean-class>utdallas.librarymanagement.managedBean.CheckInMB</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>finesMB</managed-bean-name>
+		<managed-bean-class>utdallas.librarymanagement.managedBean.FinesMB</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+   
+   <navigation-rule>
+		<from-view-id>login.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>success</from-outcome>
+			<to-view-id>/Home.jsp</to-view-id>
+		</navigation-case>
+			<navigation-case>
+			<from-outcome>managerHome</from-outcome>
+			<to-view-id>/managerHome.jsp</to-view-id>
+		</navigation-case>
+			<navigation-case>
+			<from-outcome>searchClientTrxHistory</from-outcome>
+			<to-view-id>/searchClientTrxHistory.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>failure</from-outcome>
+			<to-view-id>/loginFailure.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+   
+      <navigation-rule>
+		<from-view-id>Home.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>paymentClient</from-outcome>
+			<to-view-id>/paymentClient.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<display-name>addBorrower</display-name>
+		<from-view-id>/addBorrower.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>home</from-outcome>
+			<to-view-id>/startPage.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>bookLoans</display-name>
+		<from-view-id>/bookLoans.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>home</from-outcome>
+			<to-view-id>/startPage.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>checkIn</display-name>
+		<from-view-id>/checkIn.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>home</from-outcome>
+			<to-view-id>/startPage.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>checkout</display-name>
+		<from-view-id>/checkout.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>home</from-outcome>
+			<to-view-id>/startPage.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>fines</display-name>
+		<from-view-id>/fines.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>home</from-outcome>
+			<to-view-id>/startPage.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+</faces-config>

@@ -1,0 +1,41 @@
+package utdallas.oilTransactionMgmt.Dao;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+import javax.sql.*;
+
+
+public class ClientDao extends BaseDao 
+{
+	
+	static String fetch_client_address="select * from ots.dbo.usertype ";
+	
+	public ClientDao()
+	{
+	  	
+	}	
+	
+	
+	public void fetchAddress(int clientID)
+	{
+		try
+		{
+			 PreparedStatement statement = (PreparedStatement) getConnection().prepareStatement(this.fetch_client_address);
+			// statement.setInt(1, clientID);
+			 ResultSet rs = statement.executeQuery();
+			 while(rs.next())
+			 {
+				 String city= rs.getString("name");
+				 System.out.println(city);
+			 }
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+	
+	
+
+}
