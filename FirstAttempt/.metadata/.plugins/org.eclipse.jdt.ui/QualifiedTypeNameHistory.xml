@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="java.io.Serializable"/>
+<fullyQualifiedTypeName name="com.mysql.jdbc.PreparedStatement"/>
+<fullyQualifiedTypeName name="sun.reflect.generics.tree.BaseType"/>
+<fullyQualifiedTypeName name="utdallas.oilTransactionMgmt.Dao.ClientDao"/>
+<fullyQualifiedTypeName name="java.util.Properties"/>
+<fullyQualifiedTypeName name="java.sql.Connection"/>
+<fullyQualifiedTypeName name="utdallas.oilTransactionMgmt.Dao.LoginDao"/>
+<fullyQualifiedTypeName name="utdallas.oilTransactionMgmt.VO.LoginVO"/>
+<fullyQualifiedTypeName name="com.mysql.jdbc.CallableStatement"/>
+<fullyQualifiedTypeName name="java.sql.Types"/>
+<fullyQualifiedTypeName name="utdallas.oilTransactionMgmt.VO.newUserVO"/>
+<fullyQualifiedTypeName name="java.lang.Exception"/>
+<fullyQualifiedTypeName name="javax.faces.context.FacesContext"/>
+<fullyQualifiedTypeName name="utdallas.oilTransactionMgmt.Dao.BaseDao"/>
+<fullyQualifiedTypeName name="com.mysql.jdbc.ResultSet"/>
+<fullyQualifiedTypeName name="java.sql.ResultSet"/>
+<fullyQualifiedTypeName name="java.util.Date"/>
+<fullyQualifiedTypeName name="javax.faces.model.SelectItem"/>
+<fullyQualifiedTypeName name="utdallas.oilTransactionMgmt.VO.UserVO"/>
+<fullyQualifiedTypeName name="utdallas.oilTransactionMgmt.Dao.TransactionDao"/>
+<fullyQualifiedTypeName name="utdallas.oilTransactionMgmt.VO.TransactionVO"/>
+<fullyQualifiedTypeName name="utdallas.oilTransactionMgmt.Dao.PaymentDao"/>
+<fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
+<fullyQualifiedTypeName name="utdallas.oilTransactionMgmt.VO.paymentVO"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="utdallas.oilTransactionMgmt.Dao.SearchClientTrxHistoryDao"/>
+<fullyQualifiedTypeName name="java.text.SimpleDateFormat"/>
+<fullyQualifiedTypeName name="java.sql.Date"/>
+<fullyQualifiedTypeName name="utdallas.oilTransactionMgmt.Dao.AggregateTrxInfoDao"/>
+<fullyQualifiedTypeName name="javax.faces.event.ActionEvent"/>
+</qualifiedTypeNameHistroy>

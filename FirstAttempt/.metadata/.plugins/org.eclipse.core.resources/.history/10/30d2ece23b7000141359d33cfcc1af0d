@@ -1,0 +1,7 @@
+package utdallas.oilTransactionMgmt.MangedBean;
+
+public class PaymentMB 
+{
+  private int trxID =-1;
+  private int clientID=-1;
+}

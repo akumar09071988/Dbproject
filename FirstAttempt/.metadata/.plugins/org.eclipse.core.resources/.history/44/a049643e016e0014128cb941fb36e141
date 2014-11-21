@@ -1,0 +1,29 @@
+import java.sql.Connection;
+import java.sql.DriverManager;
+
+import utdallas.oilTransactionMgmt.Dao.ClientDao;
+import utdallas.oilTransactionMgmt.Dao.LoginDao;
+import utdallas.oilTransactionMgmt.VO.LoginVO;
+
+
+public class Test {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Connection connection =null;
+		try
+		{
+			LoginDao dao = new LoginDao();
+			LoginVO vo = new LoginVO();
+			vo.setUserName("Manager1");
+			vo.setPwd("123");
+			System.out.println(dao.authentication(vo));
+			
+		}
+         catch(Exception e)
+		{
+        	 e.printStackTrace();
+		}
+	}
+
+}

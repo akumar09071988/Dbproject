@@ -1,0 +1,44 @@
+package utdallas.oilTransactionMgmt.VO;
+
+public class paymentMasterVO 
+{
+    int pid;
+    int balance;
+    int transactionID;
+    int clientID;
+    int total;
+	public int getPid() {
+		return pid;
+	}
+	public void setPid(int pid) {
+		this.pid = pid;
+	}
+	public int getBalance() {
+		return balance;
+	}
+	public void setBalance(int balance) {
+		this.balance = balance;
+	}
+	public int getTransactionID() {
+		return transactionID;
+	}
+	public void setTransactionID(int transactionID) {
+		this.transactionID = transactionID;
+	}
+	public int getClientID() {
+		return clientID;
+	}
+	public void setClientID(int clientID) {
+		this.clientID = clientID;
+	}
+	public int getTotal() {
+		return total;
+	}
+	public void setTotal(int total) {
+		this.total = total;
+	}
+    
+    
+    
+    
+}

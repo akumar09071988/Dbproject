@@ -1,0 +1,24 @@
+package utdallas.oilTransactionMgmt.Dao;
+
+import java.sql.PreparedStatement;
+
+import utdallas.oilTransactionMgmt.VO.TransactionVO;
+import utdallas.oilTransactionMgmt.VO.UserVO;
+
+public class TransactionDao extends BaseDao
+{
+   private static String execute_transaction="{call ots.dbo.spOilTransaction(?,?,?,?,?,?,?)}";
+
+   
+   public void executeTransaction(TransactionVO transVo ,UserVO user)
+   {
+	   try
+	   {
+		   PreparedStatement statement = (PreparedStatement) getConnection().prepareStatement(this.execute_transaction);
+	   }
+	   catch(Exception e)
+	   {
+		   e.printStackTrace();
+	   }
+   }
+}

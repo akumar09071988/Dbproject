@@ -1,0 +1,41 @@
+package utdallas.oilTransactionMgmt.MangedBean;
+
+import javax.faces.event.ActionEvent;
+
+import utdallas.oilTransactionMgmt.Dao.LoginDao;
+import utdallas.oilTransactionMgmt.VO.LoginVO;
+
+public class LoginMB 
+{
+
+      private LoginVO loginVO =new LoginVO();
+
+	
+      public void loginAuth(ActionEvent ae)
+      {
+    	  System.out.println(loginVO.getUserName());
+    	  LoginDao dao = new LoginDao();
+    	  System.out.println(dao.authentication(loginVO));;
+      }
+      
+      
+      public LoginVO getLoginVO() {
+		return loginVO;
+	}
+
+	public void setLoginVO(LoginVO loginVO) {
+		this.loginVO = loginVO;
+	}
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+}

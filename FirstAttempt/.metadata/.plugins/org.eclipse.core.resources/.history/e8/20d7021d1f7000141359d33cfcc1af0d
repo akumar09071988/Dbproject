@@ -1,0 +1,32 @@
+package utdallas.oilTransactionMgmt.Dao;
+
+import java.sql.PreparedStatement;
+
+import utdallas.oilTransactionMgmt.VO.TransactionVO;
+import utdallas.oilTransactionMgmt.VO.UserVO;
+
+public class TransactionDao extends BaseDao
+{
+   private static String execute_transaction="{call ots.dbo.spOilTransaction(?,?,?,?,?,?)}";
+   private static String get_all_transaction ="select * from ots.dbo.OILTRANSACTION";
+   
+   public void executeTransaction(TransactionVO transVo ,UserVO user)
+   {
+	   try
+	   {
+		   PreparedStatement statement = (PreparedStatement) getConnection().prepareStatement(this.execute_transaction);
+		   statement.setInt(1, user.getUserID());
+		   statement.setInt(2, transVo.getTransactionType());
+		   statement.setFloat(3, transVo.getQuantity());
+		   statement.setInt(4, transVo.getCommissionType());
+		   statement.setFloat(5, transVo.getCurrentOilPrice());
+		   statement.setInt(6, transVo.getUserID());
+		   int i=statement.executeUpdate();
+		   System.out.println(i);
+	   }
+	   catch(Exception e)
+	   {
+		   e.printStackTrace();
+	   }
+   }
+}

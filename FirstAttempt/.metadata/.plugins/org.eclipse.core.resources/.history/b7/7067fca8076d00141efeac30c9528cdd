@@ -1,0 +1,7 @@
+package utdallas.oilTransactionMgmt.Dao;
+
+public class PaymentDao extends BaseDao {
+	
+	static String fetch_payment_for_transaction = "select * from dbo.payment where trxid = 16";
+
+}

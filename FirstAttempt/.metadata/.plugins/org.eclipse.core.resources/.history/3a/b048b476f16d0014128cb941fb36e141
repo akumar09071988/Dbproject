@@ -1,0 +1,43 @@
+package utdallas.oilTransactionMgmt.Dao;
+
+import java.sql.ResultSet;
+
+import utdallas.oilTransactionMgmt.VO.LoginVO;
+
+import com.microsoft.sqlserver.jdbc.SQLServerPreparedStatement;
+
+public class LoginDao extends BaseDao 
+{
+     
+	static String auth_query="select count(*)  from dbproject.users user where user.name=?  and user.password =? ";
+	
+	public String authentication(LoginVO vo)
+	{
+		String authorized = "";
+		try
+		{
+			SQLServerPreparedStatement statement = (SQLServerPreparedStatement) getConnection().prepareStatement(this.auth_query);	
+		   statement.setString(1, vo.getUserName().trim());
+		   statement.setString(2, vo.getPwd().trim());
+		   ResultSet rs = statement.executeQuery();
+		   while(rs.next())
+		   {
+			 int count=  rs.getInt(1);
+			 if(count==0)
+			 {
+				 authorized="N";
+			 }
+			 else
+			 {
+				 authorized = "Y";
+			 }
+		   }
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		closeConnection();
+		return authorized;
+	}
+}

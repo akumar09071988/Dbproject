@@ -1,0 +1,20 @@
+package utdallas.oilTransactionMgmt.MangedBean;
+
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
+
+public class PaymentMB 
+{
+  private int trxID =-1;
+  private int clientID=-1;
+
+  public PaymentMB() 
+  {
+	super();
+	FacesContext context = FacesContext.getCurrentInstance();
+    HttpSession session = (HttpSession) context.getExternalContext().getSession(true);
+    trxID =  (int) session.getAttribute("transactionID");
+  }
+  
+  
+}

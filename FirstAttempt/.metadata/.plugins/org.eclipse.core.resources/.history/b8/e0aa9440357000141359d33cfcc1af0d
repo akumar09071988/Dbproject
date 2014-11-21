@@ -1,0 +1,52 @@
+package utdallas.oilTransactionMgmt.MangedBean;
+
+import java.util.ArrayList;
+
+import javax.faces.model.SelectItem;
+
+import utdallas.oilTransactionMgmt.Dao.TransactionDao;
+import utdallas.oilTransactionMgmt.VO.TransactionVO;
+
+public class TransactionMB 
+{
+   private TransactionVO transVO = new TransactionVO();
+   private ArrayList<SelectItem> commTypeList =null;
+   
+   
+   
+   public TransactionMB() 
+   {
+		super();
+		TransactionDao dao = new TransactionDao();
+		commTypeList= dao.getCommissionFeeType();
+	    
+	}
+
+
+
+public TransactionVO getTransVO() {
+	return transVO;
+}
+
+
+
+public void setTransVO(TransactionVO transVO) {
+	this.transVO = transVO;
+}
+
+
+
+public ArrayList<SelectItem> getCommTypeList() {
+	return commTypeList;
+}
+
+
+
+public void setCommTypeList(ArrayList<SelectItem> commTypeList) {
+	this.commTypeList = commTypeList;
+}
+
+
+	
+	
+}

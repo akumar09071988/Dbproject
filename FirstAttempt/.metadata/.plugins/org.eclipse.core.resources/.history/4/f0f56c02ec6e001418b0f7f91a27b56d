@@ -1,0 +1,15 @@
+package utdallas.oilTransactionMgmt.Dao;
+
+import utdallas.oilTransactionMgmt.VO.TransactionVO;
+import utdallas.oilTransactionMgmt.VO.UserVO;
+
+public class TransactionDao 
+{
+   private static String execute_transaction="{call ots.dbo.spOilTransaction(?,?,?,?,?,?,?)}";
+
+   
+   public void executeTransaction(TransactionVO transVo ,UserVO user)
+   {
+	   
+   }
+}

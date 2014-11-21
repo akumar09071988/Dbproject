@@ -1,0 +1,137 @@
+package utdallas.oilTransactionMgmt.Dao;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import utdallas.oilTransactionMgmt.VO.ClientTrxListVO;
+
+
+
+public class SearchClientTrxHistoryDao extends BaseDao 
+{
+	
+	public SearchClientTrxHistoryDao(){}	
+	
+	
+	public List<ClientTrxListVO> searchClientTrxHistory(int clientID, String fName, String city)
+	{
+		List<ClientTrxListVO> clientTrxList = new ArrayList<ClientTrxListVO>();
+		try
+		{
+			System.out.println("in dao clientTrxHistorySearch"+clientID+" "+fName+" "+city);
+			String constructor = " ";
+			String query = "select o.trxid , o.trxtime , o.quantity, o.trxtype, o.trxamount, o.feeamount, o.feeinoil, o.commtype, o.isCancelled,o.uid from [ots].[dbo].[OILTRANSACTION] o"
+            		+ " inner join [ots].[dbo].[ADDRESS] a on o.cid=a.cid "
+            		+ " inner join [ots].[dbo].[CLIENT] c on a.cid=c.cid where "; 
+			 if(clientID!=0&&!fName.isEmpty()&&!city.isEmpty())
+	            {
+	            	constructor = "abc"; 
+	            	query += "o.cid = ? and c.fname like ? and a.city like ?";
+	            }
+	            else if(clientID!=0&&!fName.isEmpty())
+	            {
+	            	constructor = "ab";
+	            	query += "o.cid = ? and c.fname like ?";
+	            }
+	            else if(!fName.isEmpty()&&!city.isEmpty())
+	            {
+	            	constructor= "bc";
+	            	query += "c.fname like ? and a.city like ?";
+	            }
+	            else if(clientID!=0&&!city.isEmpty())
+	            {
+	            	constructor= "ac";
+	            	query += "o.cid = ? and a.city like ?";
+	            }
+	            else if(clientID!=0)
+	            {
+	            	constructor= "a";
+	            	query += "o.cid = ?";
+	            }
+	            else if(!fName.isEmpty())
+	            {
+	            	constructor= "b";
+	            	query += "c.fname like ?";
+	            }
+	            else if(!city.isEmpty())
+	            {
+	            	constructor= "c";
+	            	query += "a.address ?";
+	            }
+			 
+			 System.out.println(query);
+			 PreparedStatement statement = (PreparedStatement) getConnection().prepareStatement(query);
+	            if(constructor.equals("abc"))
+	            {
+	            	statement.setInt(1, clientID);
+	            	statement.setString(2, "%" + fName + "%");
+	            	statement.setString(3, "%" + city + "%");
+	            }
+	            else if(constructor.equals("ab"))
+	            {
+	            	statement.setInt(1, clientID);
+	            	statement.setString(2, "%" + fName + "%");
+	            }
+	            else if(constructor.equals("bc"))
+	            {
+	            	statement.setString(1, "%" + fName + "%");
+	            	statement.setString(2, "%" + city + "%");
+	            }
+	            else if(constructor.equals("ac"))
+	            {
+	            	statement.setInt(1, clientID);
+	            	statement.setString(2, "%" + city + "%");
+	            }
+	            else if(constructor.equals("a"))
+	            {
+	            	statement.setInt(1, clientID);
+	            }
+	            else if(constructor.equals("b"))
+	            {
+	            	statement.setString(1, "%" + fName + "%");
+	            }
+	            else if(constructor.equals("c"))
+	            {
+	            	statement.setString(1, "%" + city + "%");
+	            }
+			
+			
+			ResultSet rs = statement.executeQuery();
+
+            while (rs.next()) 
+            {
+            	Integer sqltrxID = rs.getInt("trxid");
+            	System.out.println("sqltrxID "+sqltrxID);
+            	//Integer sqlcid = rs.getInt("cid");
+            	Date sqltrxTime = rs.getDate("trxtime");
+            	System.out.println("sqltrxTime "+sqltrxTime);
+            	Float sqlquantity = rs.getFloat("quantity");
+            	Boolean sqltrxType = rs.getBoolean("trxtype");
+            	Float sqltrxAmount = rs.getFloat("trxamount");
+            	Float sqlfeeAmount = rs.getFloat("feeamount");
+            	Float sqlfeeInOil = rs.getFloat("feeinoil");
+            	Integer sqlcommType = rs.getInt("commtype");
+            	Boolean sqlisCancelled = rs.getBoolean("isCancelled");
+            	Integer sqluid = rs.getInt("uid");
+            	
+            	ClientTrxListVO clientTrx = new ClientTrxListVO(sqltrxID, sqltrxTime,sqlquantity, sqltrxType,sqltrxAmount, sqlfeeAmount, sqlfeeInOil,sqlcommType,sqlisCancelled,sqluid);
+            	clientTrxList.add(clientTrx);
+            	System.out.println("here end");
+            } 
+            if(clientTrxList.isEmpty())
+            {
+            	throw new Exception("Sorry!!! no records found");
+            }
+            rs.close();
+            System.out.println("Success!!");
+        }
+		catch(Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+		return clientTrxList;
+	}
+}

@@ -1,0 +1,65 @@
+package utdallas.oilTransactionMgmt.Dao;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+import com.mysql.jdbc.CallableStatement;
+
+import utdallas.oilTransactionMgmt.VO.LoginVO;
+
+
+
+public class LoginDao extends BaseDao 
+{
+     
+	static String auth_query="select count(*)  from ots.dbo.users where users.username=?  and users.password =? ";
+	static String create_user="call ots.dbo.insertNewUser()";
+	static String test ="{call ots.dbo.test(?,?)}";
+	
+	public String authentication(LoginVO vo)
+	{
+		String authorized = "";
+		try
+		{
+	
+			PreparedStatement statement = (PreparedStatement) getConnection().prepareStatement(this.auth_query);	
+		   statement.setString(1, vo.getUserName().trim());
+		   statement.setString(2, vo.getPwd().trim());
+		   ResultSet rs = statement.executeQuery();
+		   while(rs.next())
+		   {
+			 int count=  rs.getInt(1);
+			 if(count==0)
+			 {
+				 authorized="N";
+			 }
+			 else
+			 {
+				 authorized = "Y";
+			 }
+		   }
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		closeConnection();
+		return authorized;
+	}
+	
+	public void test()
+	{
+		try
+		{
+		  java.sql.CallableStatement stmt =	getConnection().prepareCall(test);
+		  stmt.setInt(1, 2);
+		  stmt.registerOutParameter(2, java.sql.Types.INTEGER);
+		  stmt.execute();
+		  System.out.println(stmt.getInt(2));
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+}

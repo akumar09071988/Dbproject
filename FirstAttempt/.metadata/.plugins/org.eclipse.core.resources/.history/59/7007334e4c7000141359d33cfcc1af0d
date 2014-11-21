@@ -1,0 +1,47 @@
+package utdallas.oilTransactionMgmt.Dao;
+
+import java.sql.ResultSet;
+import java.util.ArrayList;
+
+import utdallas.oilTransactionMgmt.VO.paymentVO;
+
+import com.mysql.jdbc.PreparedStatement;
+
+public class PaymentDao extends BaseDao {
+	
+	static String fetch_payment_for_transaction = "select * from dbo.payment where trxid = ?";
+	static String pay_for_transaction ="{call ots.dbo.spPaymentSettlement(?,?,?,?,?,?)}";
+	
+	
+	
+	public ArrayList<paymentVO> fetchPayment(int transactionID)
+	{
+		ArrayList<paymentVO> paymentList = new ArrayList<paymentVO>();
+		try
+		{
+			 
+			 PreparedStatement statement = (PreparedStatement) getConnection().prepareStatement(this.fetch_payment_for_transaction);
+			 statement.setInt(1, transactionID);
+			 ResultSet rs = statement.executeQuery();
+			 while(rs.next())
+			 {
+				paymentVO vo = new paymentVO();
+				vo.setPid(rs.getInt("pid"));
+				vo.setDate(rs.getDate("paymenttime"));
+				vo.setAmount(rs.getFloat("paymentamt"));
+				vo.setStatus(rs.getInt("isCancelled"));
+				vo.setClientID(rs.getInt("cid"));
+				vo.setTraderID(rs.getInt("traderid"));
+				vo.setTrxID(rs.getInt("trxid"));
+			    paymentList.add(vo);
+			    System.out.println(rs.getDate("paymenttime"));
+			 }
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return paymentList;
+	}
+
+}

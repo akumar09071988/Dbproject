@@ -1,0 +1,85 @@
+package utdallas.oilTransactionMgmt.MangedBean;
+
+import java.util.ArrayList;
+
+import javax.faces.context.FacesContext;
+import javax.faces.model.SelectItem;
+import javax.servlet.http.HttpSession;
+
+import utdallas.oilTransactionMgmt.Dao.TransactionDao;
+import utdallas.oilTransactionMgmt.VO.TransactionVO;
+import utdallas.oilTransactionMgmt.VO.UserVO;
+
+public class TransactionMB 
+{
+   private TransactionVO transVO = new TransactionVO();
+   private ArrayList<SelectItem> commTypeList =null;
+   private ArrayList<TransactionVO> transList = null;
+   
+   
+   public TransactionMB() 
+   {
+		super();
+		FacesContext context = FacesContext.getCurrentInstance();
+	    HttpSession session = (HttpSession) context.getExternalContext().getSession(true);
+		UserVO user = (UserVO) session.getAttribute("user");
+	    TransactionDao dao = new TransactionDao();
+		commTypeList= dao.getCommissionFeeType();
+	    transList = dao.getTransaction(user.getUserID());
+	}
+
+  public String navigateToPayment()
+  {
+	  TransactionVO outer = null;
+	  for(int i=0;i<transList.size();i++)
+	  {
+		  TransactionVO inner = transList.get(i);
+		  if(inner.isSelect())
+		  {
+			  outer =inner;
+		  }
+	  }
+	  FacesContext context = FacesContext.getCurrentInstance();
+	  HttpSession session = (HttpSession) context.getExternalContext().getSession(true);
+	  session.setAttribute("transactionID", outer.getTransactionID());
+	  return "paymentClient";
+  }
+
+public TransactionVO getTransVO() {
+	return transVO;
+}
+
+
+
+public void setTransVO(TransactionVO transVO) {
+	this.transVO = transVO;
+}
+
+
+
+public ArrayList<SelectItem> getCommTypeList() {
+	return commTypeList;
+}
+
+
+
+public void setCommTypeList(ArrayList<SelectItem> commTypeList) {
+	this.commTypeList = commTypeList;
+}
+
+
+
+public ArrayList<TransactionVO> getTransList() {
+	return transList;
+}
+
+
+
+public void setTransList(ArrayList<TransactionVO> transList) {
+	this.transList = transList;
+}
+
+
+	
+	
+}

@@ -1,0 +1,24 @@
+import java.sql.Connection;
+import java.sql.DriverManager;
+
+import utdallas.oilTransactionMgmt.Dao.ClientDao;
+
+
+public class Test {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Connection connection =null;
+		try
+		{
+			ClientDao dao = new  ClientDao();
+			dao.fetchAddress(3);
+			
+		}
+         catch(Exception e)
+		{
+        	 e.printStackTrace();
+		}
+	}
+
+}

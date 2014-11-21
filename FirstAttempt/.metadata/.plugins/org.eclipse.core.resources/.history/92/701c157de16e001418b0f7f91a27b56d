@@ -1,0 +1,5 @@
+package utdallas.oilTransactionMgmt.VO;
+
+public class UserVO {
+
+}

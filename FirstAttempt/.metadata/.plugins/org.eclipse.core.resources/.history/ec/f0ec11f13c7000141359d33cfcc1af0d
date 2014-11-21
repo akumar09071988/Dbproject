@@ -1,0 +1,36 @@
+package utdallas.oilTransactionMgmt.Dao;
+
+import java.sql.ResultSet;
+import java.util.ArrayList;
+
+import utdallas.oilTransactionMgmt.VO.paymentVO;
+
+import com.mysql.jdbc.PreparedStatement;
+
+public class PaymentDao extends BaseDao {
+	
+	static String fetch_payment_for_transaction = "select * from dbo.payment where trxid = ?";
+	
+	
+	
+	public void fetchPayment(int transactionID)
+	{
+		try
+		{
+			 
+			 PreparedStatement statement = (PreparedStatement) getConnection().prepareStatement(this.fetch_payment_for_transaction);
+			 statement.setInt(1, transactionID);
+			 ResultSet rs = statement.executeQuery();
+			 while(rs.next())
+			 {
+			    rs.getDate("paymenttime");
+			    System.out.println(rs.getDate("paymenttime"));
+			 }
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+
+}

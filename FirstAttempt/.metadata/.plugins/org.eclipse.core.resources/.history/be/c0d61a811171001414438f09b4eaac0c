@@ -1,0 +1,103 @@
+package utdallas.oilTransactionMgmt.MangedBean;
+
+import java.sql.Date;
+import java.util.List;
+
+import utdallas.oilTransactionMgmt.VO.AggregateTrxInfoListVO;
+
+public class AggregateTrxInfoMB 
+{
+	private Date trxTime;
+	public Date getTrxTime() {
+		return trxTime;
+	}
+
+
+	public void setTrxTime(Date trxTime) {
+		this.trxTime = trxTime;
+	}
+
+	List<AggregateTrxInfoListVO> aggregateTrxInfoList = null;
+	public String message;
+	
+	public AggregateTrxInfoMB(){
+		this.trxTime=null;
+	}
+	
+	
+	public List<AggregateTrxInfoListVO> getAggregateTrxInfoList() {
+		return aggregateTrxInfoList;
+	}
+
+	public void setAggregateTrxInfoList(List<AggregateTrxInfoListVO> aggregateTrxInfoList) {
+		this.aggregateTrxInfoList = aggregateTrxInfoList;
+	}
+	
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+	
+	//jsp page button click redirects here
+	//monthly report - pass button id =1
+	public String monthlyAggregateTrxInfo()
+	{
+		try
+		{
+			System.out.println("monthlyAggregateTrxInfo ");
+			this.aggregateTrxInfoList = null;
+			AggregateTrxInfoService aggregateTrxInfo = new AggregateTrxInfoService();
+			this.aggregateTrxInfoList = aggregateTrxInfo.aggregateTrxInfo(this.trxTime,1);
+			this.setMessage(null);
+			return "success";
+		}
+		catch(Exception e)
+		{
+			System.out.println(e.getMessage());
+			return "failure";
+		}
+		
+	}
+	
+	//weekly report - pass button id =2
+		public String weeklyAggregateTrxInfo()
+		{
+			try
+			{
+				this.aggregateTrxInfoList = null;
+				AggregateTrxInfoService aggregateTrxInfo = new AggregateTrxInfoService();
+				this.aggregateTrxInfoList = aggregateTrxInfo.aggregateTrxInfo(this.trxTime,2);
+				this.setMessage(null);
+				return "success";
+			}
+			catch(Exception e)
+			{
+				System.out.println(e.getMessage());
+				return "failure";
+			}
+			
+		}
+		
+		//daily report - pass button id =3
+		public String dailyAggregateTrxInfo()
+		{
+			try
+			{
+				this.aggregateTrxInfoList = null;
+				AggregateTrxInfoService aggregateTrxInfo = new AggregateTrxInfoService();
+				this.aggregateTrxInfoList = aggregateTrxInfo.aggregateTrxInfo(this.trxTime,3);
+				this.setMessage(null);
+				return "success";
+			}
+			catch(Exception e)
+			{
+				System.out.println(e.getMessage());
+				return "failure";
+			}
+			
+		}
+			
+}

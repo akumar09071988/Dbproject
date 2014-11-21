@@ -1,0 +1,10 @@
+package utdallas.oilTransactionMgmt.MangedBean;
+
+import utdallas.oilTransactionMgmt.VO.TransactionVO;
+
+public class TransactionMB 
+{
+   private TransactionVO transVO = new TransactionVO();
+	
+	
+}

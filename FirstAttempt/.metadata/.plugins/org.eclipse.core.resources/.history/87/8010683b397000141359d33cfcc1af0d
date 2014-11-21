@@ -1,0 +1,161 @@
+package utdallas.oilTransactionMgmt.VO;
+
+import java.util.Date;
+
+public class TransactionVO {
+	int quantity;
+	int transactionType;
+	int commissionType;
+	int currentOilPrice;
+	String type="";
+    int userID;
+    int transactionID;
+    Date trxDate; 
+    float trxAmount ;
+    float feeAmount ;
+    float feeInOil;
+    String cancelled="";
+    int cancelledStatus;
+    int clientID;
+    float totalTrxAmount;
+    float trxBalance;
+    String trxTypeStr="";
+    String commisionTypeStr="";
+    
+	public int getQuantity() {
+		return quantity;
+	}
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+	public int getTransactionType() {
+		return transactionType;
+	}
+	public void setTransactionType(int transactionType) {
+		this.transactionType = transactionType;
+	}
+	public int getCommissionType() {
+		return commissionType;
+	}
+	public void setCommissionType(int commissionType) {
+		this.commissionType = commissionType;
+		if(this.commissionType==1)
+		{
+			this.setCommisionTypeStr("Oil");
+			
+		}
+		else
+		{
+			this.setCommisionTypeStr("Oil");
+		}
+	}
+	public int getCurrentOilPrice() {
+		return currentOilPrice;
+	}
+	public void setCurrentOilPrice(int currentOilPrice) {
+		this.currentOilPrice = currentOilPrice;
+	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+		if(this.type.equalsIgnoreCase("1"))
+		{
+			this.setTrxTypeStr("Buy");
+		}
+		else
+		{
+			this.setTrxTypeStr("Sell");
+		}
+	}
+	public int getUserID() {
+		return userID;
+	}
+	public void setUserID(int userID) {
+		this.userID = userID;
+	}
+	public int getTransactionID() {
+		return transactionID;
+	}
+	public void setTransactionID(int transactionID) {
+		this.transactionID = transactionID;
+	}
+	public Date getTrxDate() {
+		return trxDate;
+	}
+	public void setTrxDate(Date trxDate) {
+		this.trxDate = trxDate;
+	}
+	public float getTrxAmount() {
+		return trxAmount;
+	}
+	public void setTrxAmount(float trxAmount) {
+		this.trxAmount = trxAmount;
+	}
+	public float getFeeAmount() {
+		return feeAmount;
+	}
+	public void setFeeAmount(float feeAmount) {
+		this.feeAmount = feeAmount;
+	}
+	public float getFeeInOil() {
+		return feeInOil;
+	}
+	public void setFeeInOil(float feeInOil) {
+		this.feeInOil = feeInOil;
+	}
+	public String getCancelled() {
+		return cancelled;
+	}
+	public void setCancelled(String cancelled) {
+		this.cancelled = cancelled;
+	}
+	public int getCancelledStatus() {
+		return cancelledStatus;
+	}
+	public void setCancelledStatus(int cancelledStatus) {
+		this.cancelledStatus = cancelledStatus;
+		if(this.cancelledStatus==1)
+		{
+			this.setCancelled("Not Cancelled");
+		}
+		else
+		{
+			this.setCancelled("Cancelled");
+		}
+	}
+	public int getClientID() {
+		return clientID;
+	}
+	public void setClientID(int clientID) {
+		this.clientID = clientID;
+	}
+	public float getTotalTrxAmount() {
+		return totalTrxAmount;
+	}
+	public void setTotalTrxAmount(float totalTrxAmount) {
+		this.totalTrxAmount = totalTrxAmount;
+	}
+	public float getTrxBalance() {
+		return trxBalance;
+	}
+	public void setTrxBalance(float trxBalance) {
+		this.trxBalance = trxBalance;
+	}
+	public String getTrxTypeStr() {
+		return trxTypeStr;
+	}
+	public void setTrxTypeStr(String trxTypeStr) {
+		this.trxTypeStr = trxTypeStr;
+	}
+	public String getCommisionTypeStr() {
+		return commisionTypeStr;
+	}
+	public void setCommisionTypeStr(String commisionTypeStr) {
+		this.commisionTypeStr = commisionTypeStr;
+	}
+    
+    
+    
+}

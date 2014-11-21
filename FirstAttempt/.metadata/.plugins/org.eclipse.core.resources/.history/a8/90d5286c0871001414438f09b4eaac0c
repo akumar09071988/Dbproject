@@ -1,0 +1,70 @@
+package utdallas.oilTransactionMgmt.Dao;
+
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+
+import utdallas.oilTransactionMgmt.VO.AggregateTrxInfoListVO;
+
+
+
+public class AggregateTrxInfoDao extends BaseDao 
+{
+	//private static String execute_monthly="{call ots.dbo.spMonthlyTrxInfo(?)}";	
+	private static String execute_monthly = "ots.dbo.spMonthlyTrxInfo(?)";
+	private static String execute_weekly = "ots.dbo.spWeeklyTrxInfo(?)";
+	private static String execute_daily = "ots.dbo.spDailyTrxInfo(?)";
+	
+	public AggregateTrxInfoDao(){}
+		
+		public List<AggregateTrxInfoListVO> computeAggregateTrxInfo(Date trxTime, int btnID)
+		{
+			PreparedStatement statement = null;
+			List<AggregateTrxInfoListVO> aggregateTrxInfoList = new ArrayList<AggregateTrxInfoListVO>();
+			try
+			{				
+				 if(btnID ==1) //monthly report
+				 {	 statement.setDate(1, trxTime);			 
+					 statement = (PreparedStatement) getConnection().prepareStatement(this.execute_monthly);
+				 }
+				 else if(btnID ==2)//weekly report
+				 {
+					 statement.setDate(1,trxTime);
+					 statement = (PreparedStatement) getConnection().prepareStatement(this.execute_weekly);
+				 }
+					
+				 else //daily report
+				 {
+					 statement.setDate(1,trxTime);
+					 statement = (PreparedStatement) getConnection().prepareStatement(this.execute_daily);
+				 }
+		        //execute the stored procedure   				
+				ResultSet rs = statement.executeQuery();
+
+	            while (rs.next()) 
+	            {
+	            	Integer sqlnoOfTrx = rs.getInt("noOfTrx");
+	            	Float sqltotalTrxQuantity = rs.getFloat("totalTrxQuantity");
+	            	Float sqlavgTrxQuantity = rs.getFloat("avgTrxQuantity");
+	            	
+	            	AggregateTrxInfoListVO aggregateTrx = new AggregateTrxInfoListVO(sqlnoOfTrx, sqltotalTrxQuantity,sqlavgTrxQuantity);
+	            	aggregateTrxInfoList.add(aggregateTrx);
+	            	System.out.println();
+	            } 
+	            if(aggregateTrxInfoList.isEmpty())
+	            {
+	            	throw new Exception("Sorry!!! No Transactions found");
+	            }
+	            rs.close();
+	            System.out.println("Success!!");
+	        }
+			catch(Exception e)
+			{
+				e.printStackTrace();
+				System.out.println(e.getMessage());
+			}
+			return aggregateTrxInfoList;
+	}
+}
